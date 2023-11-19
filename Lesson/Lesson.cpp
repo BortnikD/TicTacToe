@@ -10,7 +10,7 @@ string arr[ROWS][COLS]
 	{"[ ]","[ ]","[ ]"}
 };
 
-int tempFoo()
+int chooseCell ()
 {
 	cout << "Выберите ячейку!\nВаш выбор: ";
 	int cell;
@@ -29,7 +29,7 @@ void arrOut()
 	}
 }
 
-int checkWin() {
+int checkWinX() {
 	
 	for (int i = 0; i < ROWS; ++i) {
 		if (arr[i][0] == arr[i][1] && arr[i][1] == arr[i][2] && arr[i][0] == "[x]") {
@@ -86,60 +86,61 @@ int main()
 		}
 		cout << endl;
 	}
-
 	while (true) {
-		cout << "Ход игрока за крестиков!\n";
-		switch (tempFoo())
+		cout << "Ход игрока Х!\n";
+	
+			switch (chooseCell())
+			{
+			case 1:
+				arr[0][0] = "[x]";
+				arrOut();
+				break;
+			case 2:
+				arr[0][1] = "[x]";
+				arrOut();
+				break;
+			case 3:
+				arr[0][2] = "[x]";
+				arrOut();
+				break;
+			case 4:
+				arr[1][0] = "[x]";
+				arrOut();
+				break;
+			case 5:
+				arr[1][1] = "[x]";
+				arrOut();
+				break;
+			case 6:
+				arr[1][2] = "[x]";
+				arrOut();
+				break;
+			case 7:
+				arr[2][0] = "[x]";
+				arrOut();
+				break;
+			case 8:
+				arr[2][1] = "[x]";
+				arrOut();
+				break;
+			case 9:
+				arr[2][2] = "[x]";
+				arrOut();
+				break;
+			default:
+				cout << "Данной ячейки не существует";
+			}
+
+
+		if (checkWinX())
 		{
-		case 0: 
-		    cout << "До свидания!\n";
-			return 0;
-		case 1:
-			arr[0][0] = "[x]";
-			arrOut();
-			break;
-		case 2:
-			arr[0][1] = "[x]";
-			arrOut();
-			break;
-		case 3:
-			arr[0][2] = "[x]";
-			arrOut();
-			break;
-		case 4:
-			arr[1][0] = "[x]";
-			arrOut();
-			break;
-		case 5:
-			arr[1][1] = "[x]";
-			arrOut();
-			break;
-		case 6:
-			arr[1][2] = "[x]";
-			arrOut();
-			break;
-		case 7:
-			arr[2][0] = "[x]";
-			arrOut();
-			break;
-		case 8:
-			arr[2][1] = "[x]";
-			arrOut();
-			break;
-		case 9:
-			arr[2][2] = "[x]";
-			arrOut();
-			break;
-		default: 
-			cout << "Данной ячейки не существует";
-		}
-		if (checkWin())
-		{
-			cout << "Игрок за крестиков победил!\n";
+			cout << "Игрок Х победил!\n";
 			return 0;
 		}
-		cout << "Ход игрока за ноликов!\n";
-		switch (tempFoo())
+
+		cout << "Ход игрока 0!\n";
+
+		switch (chooseCell())
 		{
 		case 0:
 			cout << "До свидания!\n";
@@ -185,7 +186,7 @@ int main()
 		}
 		if (checkWin0())
 		{
-			cout << "Игрок за ноликов победил!\n";
+			cout << "Игрок 0 победил!\n";
 			return 0;
 		}
 	}
