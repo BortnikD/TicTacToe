@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 const int ROWS = 3, COLS = 3;
@@ -10,13 +11,32 @@ string arr[ROWS][COLS]
 	{"[ ]","[ ]","[ ]"}
 };
 
+vector<vector<bool>> cellOccupied(ROWS, vector<bool>(COLS, false));
+
 int chooseCell ()
 {
 	cout << "Выберите ячейку!\nВаш выбор: ";
 	int cell;
 	cin >> cell;
 	cout << endl;
-	return cell;
+	int row = (cell - 1) / COLS;
+	int col = (cell - 1) % COLS;
+	if (cell <= 9 && cell > 0)
+	{
+		if (cellOccupied[row][col]) {
+			cout << "Эта ячейка уже занята. Выберите другую.\n";
+			return chooseCell();
+		}
+		
+		cellOccupied[row][col] = true;
+
+		return cell;
+	}
+	else
+	{
+		cout << "Данной ячейки не существует, выберите ячейку от 1 до 9 включительно\n";
+		return chooseCell();
+	}
 }
 
 void arrOut()
@@ -74,6 +94,20 @@ int checkWin0()
 		return 1;
 	}
 }
+bool checkDraw()
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			if (!cellOccupied[i][j])
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
 
 int main()
 {
@@ -86,7 +120,9 @@ int main()
 		}
 		cout << endl;
 	}
-	while (true) {
+	while (true) 
+	{
+		
 		cout << "Ход игрока Х!\n";
 	
 			switch (chooseCell())
@@ -138,13 +174,16 @@ int main()
 			return 0;
 		}
 
+		if (checkDraw())
+		{
+			cout << "Ничья!\n";
+			return 0;
+		}
+
 		cout << "Ход игрока 0!\n";
 
 		switch (chooseCell())
 		{
-		case 0:
-			cout << "До свидания!\n";
-			return 0;
 		case 1:
 			arr[0][0] = "[0]";
 			arrOut();
@@ -184,9 +223,16 @@ int main()
 		default:
 			cout << "Данной ячейки не существует";
 		}
+
 		if (checkWin0())
 		{
 			cout << "Игрок 0 победил!\n";
+			return 0;
+		}
+
+		if (checkDraw())
+		{
+			cout << "Ничья!\n";
 			return 0;
 		}
 	}
