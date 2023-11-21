@@ -21,6 +21,13 @@ int chooseCell ()
 	cout << endl;
 	int row = (cell - 1) / COLS;
 	int col = (cell - 1) % COLS;
+	if (cin.fail())
+	{
+		cin.clear(); // Сбрасываем флаг ошибки
+		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Очищаем входной буфер
+		cout << "Введите корректное число (можно использовать только арабские цифры от 1 до 9)!\n";
+		chooseCell();
+	}
 	if (cell <= 9 && cell > 0)
 	{
 		if (cellOccupied[row][col]) {
