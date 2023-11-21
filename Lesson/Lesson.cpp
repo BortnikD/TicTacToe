@@ -24,9 +24,9 @@ int chooseCell ()
 	if (cin.fail())
 	{
 		cin.clear(); // Сбрасываем флаг ошибки
-		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Очищаем входной буфер
+		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Очищаем входной буфер до следующего знака, в этом случае до \n
 		cout << "Введите корректное число (можно использовать только арабские цифры от 1 до 9)!\n";
-		chooseCell();
+		return chooseCell();
 	}
 	if (cell <= 9 && cell > 0)
 	{
@@ -119,7 +119,7 @@ bool checkDraw()
 int main()
 {
 	setlocale(LC_ALL, "ru");
-	cout << "Здравствуйте!\n";
+	cout << "Здравствуйте!\n\n";
 
 	for (int i = 0; i < ROWS; ++i) {
 		for (int j = 0; j < COLS; ++j) {
