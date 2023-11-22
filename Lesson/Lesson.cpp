@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <ctime>
+//#include <SFML/Graphics.hpp>
 using namespace std;
 
 const int ROWS = 3, COLS = 3;
